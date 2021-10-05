@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ccrop">
+<sql id="search">
+      SELECT * FROM ccrop 
+      
+      <where>
+      	 <if test="search == 1">
+      	 	cul=#{keyword}
+      	 </if>
+      	 
+      	  <if test="search == 2">
+            dat LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+		 </if>
+      	 
+      	 <if test="search == 3">
+            area LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 4">
+            nor LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 5">
+            non LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 6">
+            fre LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 7">
+            adry LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+
+		 <if test="search == 8">
+            hea LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 9">
+            pla LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 10">
+            lea LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+      	 <if test="search == 11">
+      	 	 dep=#{keyword}
+      	 </if>
+      </where>
+      <if test="orderMode == 1">
+				ORDER BY ${order} ASC
+			</if>
+			<if test="orderMode == 2">
+				ORDER BY ${order} DESC
+			</if>
+   </sql>
+   <select id="total" resultType="Integer">
+      SELECT COUNT(*)
+      FROM (<include refid="search"></include>)
+   </select>
+	<select id="list" resultType="Ccrop">
+		SELECT * FROM 
+		(SELECT ROWNUM rnum, sub. * FROM
+         (<include refid="search"></include>) sub)
+      <![CDATA[ 
+         WHERE rnum >= ((#{page} - 1) * #{perPage} + 1) AND rnum <=(#{page} * #{perPage})
+      ]]>
+	</select>
+	<delete id="delete"> 
+		DELETE FROM ccrop WHERE seq5=#{seq5}
+	</delete>
+	<insert id="add">
+		INSERT INTO ccrop (seq5, cul, dat, area, nor, non, fre, adry, hea, pla, lea, image, dep)
+		VALUES (SEQ5.nextval, #{cul}, #{dat}, #{area}, #{nor}, #{non}, #{fre}, #{adry}, #{hea}, #{pla}, #{lea}, #{image}, #{dep})
+	</insert>
+	<update id="update">
+		UPDATE ccrop SET cul=#{cul}, dat=#{dat}, area=#{area}, nor=#{nor}, non=#{non}, fre=#{fre}, adry=#{adry}, hea=#{hea}, pla=#{pla}, lea=#{lea}, image=#{image}, dep=#{dep}
+		WHERE seq5=#{seq5}
+	</update>
+	<select id="item" resultType="Ccrop">
+		SELECT * FROM ccrop WHERE seq5=#{seq5}
+	</select>
+</mapper>

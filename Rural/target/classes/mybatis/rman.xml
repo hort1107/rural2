@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rman">
+<sql id="search">
+      SELECT * FROM rman 
+      
+      <where>
+      	 <if test="search == 1">
+      	 	cul=#{keyword}
+      	 </if>
+      	 
+      	  <if test="search == 2">
+            total LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+		 </if>
+      	 
+      	 <if test="search == 3">
+            basal LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 4">
+            fer LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 5">
+            dress LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 6">
+            irri LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+
+      	 <if test="search == 7">
+      	 	 dep=#{keyword}
+      	 </if>
+      </where>
+      <if test="orderMode == 1">
+				ORDER BY ${order} ASC
+			</if>
+			<if test="orderMode == 2">
+				ORDER BY ${order} DESC
+			</if>
+   </sql>
+   <select id="total" resultType="Integer">
+      SELECT COUNT(*)
+      FROM (<include refid="search"></include>)
+   </select>
+	<select id="list" resultType="Rman">
+		SELECT * FROM 
+		(SELECT ROWNUM rnum, sub. * FROM
+         (<include refid="search"></include>) sub)
+      <![CDATA[ 
+         WHERE rnum >= ((#{page} - 1) * #{perPage} + 1) AND rnum <=(#{page} * #{perPage})
+      ]]>
+	</select>
+	<delete id="delete"> 
+		DELETE FROM rman WHERE seq7=#{seq7}
+	</delete>
+	<insert id="add">
+		INSERT INTO rman (seq7, cul, total, basal, fer, dress, irri, image, dep)
+		VALUES (SEQ7.nextval, #{cul}, #{total}, #{basal}, #{fer}, #{dress}, #{irri}, #{image}, #{dep})
+	</insert>
+	<update id="update">
+		UPDATE rman SET cul=#{cul}, total=#{total}, basal=#{basal}, fer=#{fer}, dress=#{dress}, irri=#{irri}, image=#{image}, dep=#{dep}
+		WHERE seq7=#{seq7}
+	</update>
+	<select id="item" resultType="Rman">
+		SELECT * FROM rman WHERE seq7=#{seq7}
+	</select>
+</mapper>

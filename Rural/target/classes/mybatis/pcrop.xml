@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pcrop">
+<sql id="search">
+      SELECT * FROM pcrop 
+      
+      <where>
+      	 <if test="search == 1">
+      	 	cul=#{keyword}
+      	 </if>
+      	 
+      	  <if test="search == 2">
+            dat LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+		 </if>
+      	 
+      	 <if test="search == 3">
+            area LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 4">
+            plan LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 5">
+            per LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 6">
+            fwe LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 7">
+            ldr LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+
+		 <if test="search == 8">
+            sdr LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 9">
+            pla LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+         <if test="search == 10">
+            fru LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+         </if>
+         
+      	 <if test="search == 11">
+      	 	 dep=#{keyword}
+      	 </if>
+      </where>
+      <if test="orderMode == 1">
+				ORDER BY ${order} ASC
+			</if>
+			<if test="orderMode == 2">
+				ORDER BY ${order} DESC
+			</if>
+   </sql>
+   <select id="total" resultType="Integer">
+      SELECT COUNT(*)
+      FROM (<include refid="search"></include>)
+   </select>
+	<select id="list" resultType="Pcrop">
+		SELECT * FROM 
+		(SELECT ROWNUM rnum, sub. * FROM
+         (<include refid="search"></include>) sub)
+      <![CDATA[ 
+         WHERE rnum >= ((#{page} - 1) * #{perPage} + 1) AND rnum <=(#{page} * #{perPage})
+      ]]> 
+	</select>
+	<delete id="delete"> 
+		DELETE FROM pcrop WHERE seq11=#{seq11}
+	</delete>
+	<insert id="add">
+		INSERT INTO pcrop (seq11, cul, dat, area, plan, per, fwe, ldr, sdr, pla, fru, image, dep)
+		VALUES (SEQ11.nextval, #{cul}, #{dat}, #{area}, #{plan}, #{per}, #{fwe}, #{ldr}, #{sdr}, #{pla}, #{fru}, #{image}, #{dep})
+	</insert>
+	<update id="update">
+		UPDATE pcrop SET cul=#{cul}, dat=#{dat}, area=#{area}, plan=#{plan}, per=#{per}, fwe=#{fwe}, ldr=#{ldr}, sdr=#{sdr}, pla=#{pla}, fru=#{fru}, image=#{image}, dep=#{dep}
+		WHERE seq11=#{seq11}
+	</update>
+	<select id="item" resultType="Pcrop">
+		SELECT * FROM pcrop WHERE seq11=#{seq11}
+	</select>
+</mapper>

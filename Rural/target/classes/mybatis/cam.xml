@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cam">
+<sql id="search">
+      SELECT * FROM cam 
+      
+      <where>
+      	 <if test="search == 1">
+      	 	dep=#{keyword}
+      	 </if>
+      	 
+      	  <if test="search == 2">
+            dep LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+		 </if>
+      	 
+      </where>
+      <if test="orderMode == 1">
+				ORDER BY ${order} ASC
+			</if>
+			<if test="orderMode == 2">
+				ORDER BY ${order} DESC
+			</if>
+   </sql>
+   <select id="total" resultType="Integer">
+      SELECT COUNT(*)
+      FROM (<include refid="search"></include>)
+   </select>
+   
+	<select id="list" resultType="Cam">
+		SELECT * FROM 
+		(SELECT ROWNUM rnum, sub. * FROM
+         (<include refid="search"></include>) sub)
+      <![CDATA[ 
+         WHERE rnum >= ((#{page} - 1) * #{perPage} + 1) AND rnum <=(#{page} * #{perPage})
+      ]]>
+   </select>
+	<delete id="delete"> 
+		DELETE FROM cam WHERE dep=#{dep}
+	</delete>
+	<insert id="add">
+		INSERT INTO cam (dep, seq15)
+		VALUES (#{dep}, SEQ15.nextval)
+	</insert>
+	<update id="update">
+		UPDATE cam SET dep=#{dep}, seq15=#{seq15}
+		WHERE dep=#{dep}
+	</update>
+	<select id="item" resultType="Cam">
+		SELECT * FROM cam WHERE dep=#{dep}
+	</select>
+</mapper>

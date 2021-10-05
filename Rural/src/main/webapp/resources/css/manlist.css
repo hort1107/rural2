@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    font-size: 15px;
+    background-color: #fff;
+    color: #222328;
+}
+.container {
+    width: 1200px;
+    margin: auto;
+}
+header {
+    height: 100px;
+    position: relative;
+    z-index: 10;
+}
+header > div {
+    height: 100px;
+}
+.header-logo {
+    width: 200px;
+    float: left;
+    line-height: 100px;
+}
+.navi {
+    width: 600px;
+    float: right;
+    margin-right: 20px;
+}
+.menu1{
+	
+	line-height: 70px;
+}
+.menu1 a {
+    text-decoration: none;
+    font-weight: bold;
+    color:#585858;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    padding-top: 20px;
+}
+
+.menu li {
+    float: left;
+    width: 25%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.menu li > a {
+    border: 1px solid black;
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color:#585858;
+}
+.menu li:hover > a {
+    background-color: #000;
+    color: #fff;
+}
+
+.menu li:first-child .sub-menu {
+    border-left: 1px solid #000
+}
+.menu li:last-child .sub-menu {
+    border-right: 1px solid #000;
+}
+.slide {
+    margin-bottom: 20px;
+}
+.slide > div {
+    height: 300px;
+}
+.slide {
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    overflow: hidden;
+}
+.slide > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: slide 10s linear infinite;
+    font-size: 0;
+}
+.items {
+    overflow: hidden;
+    float: right;
+}
+.items > div {
+    height: 50px;
+    float: left;
+    box-sizing: border-box;
+     float: right;
+}
+.tab-inner {
+    width: 95%;
+    margin: auto;
+}
+.btn a.active {
+    background-color: #fff;
+    float: right;
+}
+.news {
+    width: 500px;
+}
+.banner {
+    width: 350px;
+}
+.btn a {
+    border: 1px solid #000;
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px 5px 0 0;
+    margin-right: -6px;
+    border-bottom: none;
+    margin-bottom: -1px;
+    background-color: #ddd;
+}
+
+@keyframes slide {
+    0% {
+        top: 0;
+    }
+    30% {
+        top: 0;
+    }
+    35% {
+        top: -300px;
+    }
+    65% {
+        top: -300px;
+    }
+    70% {
+        top: -600px;
+    }
+    95% {
+        top: -600px;
+    }
+    100% {
+        top: 0;
+    }
+}

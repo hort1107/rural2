@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="kr.ac.kopo.rural.model.Rbasic" alias="Rbasic" />
+		<typeAlias type="kr.ac.kopo.rural.model.Rcrop" alias="Rcrop" />
+		<typeAlias type="kr.ac.kopo.rural.model.Cam" alias="Cam" />
+		<typeAlias type="kr.ac.kopo.rural.model.Rdam" alias="Rdam" />
+		<typeAlias type="kr.ac.kopo.rural.model.Rman" alias="Rman" />
+		<typeAlias type="kr.ac.kopo.rural.model.Cbasic" alias="Cbasic" />
+		<typeAlias type="kr.ac.kopo.rural.model.Ccrop" alias="Ccrop" />
+		<typeAlias type="kr.ac.kopo.rural.model.Cdam" alias="Cdam" />
+		<typeAlias type="kr.ac.kopo.rural.model.Cman" alias="Cman" />
+		<typeAlias type="kr.ac.kopo.rural.model.Obasic" alias="Obasic" />
+		<typeAlias type="kr.ac.kopo.rural.model.Ocrop" alias="Ocrop" />
+		<typeAlias type="kr.ac.kopo.rural.model.Odam" alias="Odam" />
+		<typeAlias type="kr.ac.kopo.rural.model.Oman" alias="Oman" />
+		<typeAlias type="kr.ac.kopo.rural.model.Pbasic" alias="Pbasic" />
+		<typeAlias type="kr.ac.kopo.rural.model.Pcrop" alias="Pcrop" />
+		<typeAlias type="kr.ac.kopo.rural.model.Pdam" alias="Pdam" />
+		<typeAlias type="kr.ac.kopo.rural.model.Pman" alias="Pman" />
+		<typeAlias type="kr.ac.kopo.rural.model.Member" alias="Member" />
+		<typeAlias type="kr.ac.kopo.rural.model.Noti" alias="Noti" />
+		<typeAlias type="kr.ac.kopo.rural.model.Us" alias="Us" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/rbasic.xml" />
+		<mapper resource="mybatis/rcrop.xml" />
+		<mapper resource="mybatis/cam.xml" />
+		<mapper resource="mybatis/rdam.xml" />
+		<mapper resource="mybatis/rman.xml" />
+		<mapper resource="mybatis/cbasic.xml" />
+		<mapper resource="mybatis/ccrop.xml" />
+		<mapper resource="mybatis/cdam.xml" />
+		<mapper resource="mybatis/cman.xml" />
+		<mapper resource="mybatis/obasic.xml" />
+		<mapper resource="mybatis/ocrop.xml" />
+		<mapper resource="mybatis/odam.xml" />
+		<mapper resource="mybatis/oman.xml" />
+		<mapper resource="mybatis/pbasic.xml" />
+		<mapper resource="mybatis/pcrop.xml" />
+		<mapper resource="mybatis/pdam.xml" />
+		<mapper resource="mybatis/pman.xml" />
+		<mapper resource="mybatis/member.xml" />
+		<mapper resource="mybatis/noti.xml" />
+		<mapper resource="mybatis/us.xml" />
+	</mappers> 
+</configuration>
